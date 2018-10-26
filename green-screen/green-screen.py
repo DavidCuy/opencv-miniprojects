@@ -8,6 +8,7 @@ parser.add_argument("-o", "--output", dest='output', required=True, help="path t
 parser.add_argument("-f", "--fps", dest='fps', type=int, default=20, help="FPS of output video")
 parser.add_argument("-c", "--codec", dest='codec', type=str, default="MJPG", help="codec of output video")
 parser.add_argument("-v", "--videocam", dest='videocam', type=int, default=0, help="number of video camara to use")
+parser.add_argument("-l", "--learn", dest='learn', type=int, default=5, help="learn time of background subtractor (in seconds)")
 args_input = parser.parse_args()
 
 def main():
@@ -47,7 +48,7 @@ def main():
 
         cv2.imshow('Video', frame)
 
-        calibrateFlag = True if (time.time() - initTime > 5) else False
+        calibrateFlag = True if (time.time() - initTime > args_input.learn) else False
 
         if(cv2.waitKey(1) & 0xFF == ord('q')):
             break
