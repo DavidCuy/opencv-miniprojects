@@ -19,6 +19,8 @@ def main():
     hasFrame, frame = cap.read()
     vid_writer = cv2.VideoWriter(args_input.output, fouorcc, args_input.fps, (frame.shape[1],frame.shape[0]))
 
+    vid_writer2 = cv2.VideoWriter("normal.avi", fouorcc, args_input.fps, (frame.shape[1],frame.shape[0]))
+
     calibrateFlag = False
     initTime = time.time()
     calibratingText = "Learning background..."
@@ -47,6 +49,7 @@ def main():
 
 
         cv2.imshow('Video', frame)
+        vid_writer2.write(frame)
 
         calibrateFlag = True if (time.time() - initTime > args_input.learn) else False
 
@@ -54,6 +57,7 @@ def main():
             break
 
     vid_writer.release()
+    vid_writer2.release()
     cap.release()
     cv2.destroyAllWindows()
 
