@@ -9,6 +9,7 @@
 *.pro
 *.sdf
 *.pro.user
+*dir
 
 # multimedia
 *.avi
